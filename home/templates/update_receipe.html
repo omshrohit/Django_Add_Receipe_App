@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0%;
+            padding:0%;
+            box-sizing:border-box;
+        } 
+
+        body{
+            background-color:aqua;
+        }
+       .container{
+        margin-top:40px;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+       }
+        input{
+            width:400px;
+            height:30px;
+        }
+        textarea{
+            width:400px;
+            height:50px;
+        }
+        table{
+            width:1000px;
+            
+        }
+        img{
+            width:100px;
+            height:100px;
+        }
+        td{
+            text-align:center;
+        }
+        button:hover{
+            background-color:gray;
+            cursor:pointer;
+        }
+        .fil:hover{
+            cursor:pointer;
+        }
+       
+      
+        table tr td button{
+            background-color:red;
+            color:black;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>Update your Receipe</h1>
+        </div>
+        <div class="box1">
+            <form  method="POST" enctype='multipart/form-data' >
+                {% csrf_token %}
+                <label for="ExampleInputName" class='form-label'>Receipe name</label><br>
+                <input type='text' name='receipe_name' value={{receipe.receipe_name}} class='form-label' placeholder='Receipe-Name' required><br>
+                <label for="ExampleInputName" class='form-label'>Receipe description</label><br>
+                <textarea placeholder='Description' name='receipe_description' >{{receipe.receipe_description}}</textarea><br>
+                
+                <div class='fil'>
+                    <input type='file' class='form-control'  name='receipe_image' />
+                </div>
+                <button type='submit' class="btn-primary">Update Receipe</button><br>
+            </form>
+        </div>
+    </div>
+
+  
+   
+</body>
+</html>

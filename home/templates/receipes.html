@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0%;
+            padding:0%;
+            box-sizing:border-box;
+        } 
+
+        body{
+            background-color:aqua;
+        }
+       .container{
+        margin-top:40px;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+       }
+        input{
+            width:400px;
+            height:30px;
+        }
+        textarea{
+            width:400px;
+            height:50px;
+        }
+        table{
+            width:1000px;
+            
+        }
+        img{
+            width:100px;
+            height:100px;
+        }
+        td{
+            text-align:center;
+        }
+        button:hover{
+            background-color:gray;
+            cursor:pointer;
+        }
+        .fil:hover{
+            cursor:pointer;
+        }
+       
+      
+        table tr td button{
+            background-color:red;
+            color:black;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>Add your Receipe</h1>
+        </div>
+        <div class="box1">
+            <form action='/receipes/' method="POST" enctype='multipart/form-data' >
+                {% csrf_token %}
+                <label for="ExampleInputName" class='form-label'>Receipe name</label><br>
+                <input type='text' name='receipe_name' class='form-label' placeholder='Receipe-Name' required><br>
+                <label for="ExampleInputName" class='form-label'>Receipe description</label><br>
+                <textarea placeholder='Description' name='receipe_description' required></textarea><br>
+                
+                <div class='fil'>
+                    <input type='file' class='form-control'  name='receipe_image' />
+                </div>
+                <button type='submit' class="btn-primary">Add Receipe</button><br>
+            </form>
+            
+        </div>
+    </div>
+    
+
+   <div class='container'>
+    <table border="solid">
+        <tr>
+            <th>S.NO</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>action</th>
+        </tr>
+        
+        {% for receipe in receipes %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ receipe.receipe_name}}</td>
+            <td>{{ receipe.receipe_description}}</td>
+            <td><img src='/media/{{ receipe.receipe_image}}'/></td>
+            <td>
+                <button><a href="/delete_receipe/{{receipe.id}}/" class="btn btn-danger">Delete</a></button>
+                <button><a href="/update_receipe/{{receipe.id}}/" class="btn btn-danger">Update</a></button>
+            </td>
+            
+        </tr>
+        {% endfor %}
+
+    </table>
+   </div>
+</body>
+</html>
